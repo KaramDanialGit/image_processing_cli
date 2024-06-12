@@ -1,2 +1,2 @@
-# image_processor_cli
+# Image Processing Cli
 On-going image-processing CLI programmed in Rust
