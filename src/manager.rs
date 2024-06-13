@@ -1,4 +1,3 @@
-use image::DynamicImage::ImageLuma8;
 use image::Rgb;
 use image::{ImageBuffer, Luma, Pixel};
 use std::path::Path;

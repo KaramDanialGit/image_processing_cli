@@ -1,3 +1,5 @@
+use crate::manager::get_image;
+use image::{ImageFormat, Pixel, Rgb, RgbImage};
 use std::cmp::max;
 use std::f64::consts::{E, PI};
 
@@ -35,7 +37,7 @@ fn generate_gaussian_kernel(radius: i32) -> Vec<Vec<f32>> {
     kernel
 }
 
-fn gaussian_blur_png(image_name: &String, radius: i32) -> Result<(), &str> {
+pub fn gaussian_blur_png(image_name: &String, radius: i32) -> Result<(), &str> {
     let get_path: String = format!("images/{}", image_name);
     let set_path: String = format!("new_images/blur_{}", image_name);
     let kernel = generate_gaussian_kernel(radius);

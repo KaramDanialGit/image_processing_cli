@@ -1,4 +1,8 @@
+mod gaussian;
+mod gray;
+mod histogram;
 mod manager;
+
 use std::env;
 use std::result::Result;
 
@@ -19,8 +23,9 @@ fn main() -> Result<(), &'static str> {
     }
 
     let image_type: String = manager::get_image_type(&args[1]);
-    let image_name: String = args[1].clone();
-    let op: String = args[2].clone();
+    let image_name: &String = &args[1];
+    let op: &String = &args[2];
+    let parameter: Option<String> = Some(args[3].clone());
 
     match image_type.as_str() {
         ".jpeg" => println!("jpeg image"),
@@ -28,14 +33,17 @@ fn main() -> Result<(), &'static str> {
         _ => println!("Please, enter a compatible image file"),
     };
 
-    // let _ = match op.as_str() {
-    //     "gray" => convert_to_gray_png(&image_name),
-    //     "gaussian_blur" => {
-    //         let parameter: String = args[3].clone();
-    //         gaussian_blur_png(&image_name, parameter.parse::<i32>().unwrap())
-    //     }
-    //     _ => Err("Please, enter a valid function"),
-    // };
+    let _ = match op.as_str() {
+        "gray" => gray::convert_to_gray_png(image_name),
+        "gaussian_blur" => gaussian::gaussian_blur_png(
+            image_name,
+            parameter
+                .expect("No parameter passed after funciton call")
+                .parse::<i32>()
+                .unwrap(),
+        ),
+        _ => Err("Please, enter a valid function"),
+    };
 
     Ok(())
 }

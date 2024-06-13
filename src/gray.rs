@@ -1,9 +1,11 @@
-use image::{buffer::ConvertBuffer, GrayImage, ImageBuffer, ImageFormat, Luma, Pixel};
+use crate::manager::get_image;
+use image::DynamicImage::ImageLuma8;
+use image::{buffer::ConvertBuffer, GrayImage};
 
-fn convert_to_gray_png(image_name: &String) -> Result<(), &str> {
+pub fn convert_to_gray_png(image_name: &String) -> Result<(), &str> {
     let get_path: String = format!("images/{}", image_name);
     let set_path: String = format!("new_images/gray_{}", image_name);
-    let img = manager::get_image(&get_path);
+    let img = get_image(&get_path);
 
     if img.is_none() {
         return Err("Image not found");

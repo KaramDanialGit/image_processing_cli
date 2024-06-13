@@ -1,9 +1,8 @@
-use image::{buffer::ConvertBuffer, GrayImage, ImageBuffer, ImageFormat, Luma, Pixel};
-use image::{Rgb, RgbImage};
+use crate::manager::{
+    get_blue_channel, get_bw_channel, get_green_channel, get_image, get_red_channel,
+};
+use image::{buffer::ConvertBuffer, GrayImage};
 use plotters::prelude::*;
-
-mod gray;
-mod manager;
 
 pub fn generate_red_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
     let get_path: String = format!("images/{}", image_name);
@@ -47,7 +46,7 @@ pub fn generate_red_histogram(image_name: &String) -> Result<(), Box<dyn std::er
     Ok(())
 }
 
-fn generate_green_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
+pub fn generate_green_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
     let get_path: String = format!("images/{}", image_name);
     let hist_out_name: &str = "plotters-doc-data/green_histogram.png";
     let img = get_image(&get_path).unwrap();
@@ -89,7 +88,7 @@ fn generate_green_histogram(image_name: &String) -> Result<(), Box<dyn std::erro
     Ok(())
 }
 
-fn generate_blue_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
+pub fn generate_blue_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
     let get_path: String = format!("images/{}", image_name);
     let hist_out_name: &str = "plotters-doc-data/blue_histogram.png";
     let img = get_image(&get_path).unwrap();
@@ -131,7 +130,7 @@ fn generate_blue_histogram(image_name: &String) -> Result<(), Box<dyn std::error
     Ok(())
 }
 
-fn generate_bw_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
+pub fn generate_bw_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
     let get_path: String = format!("images/{}", image_name);
     let hist_out_name: &str = "plotters-doc-data/bw_histogram.png";
     let img = get_image(&get_path).unwrap();
