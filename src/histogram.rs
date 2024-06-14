@@ -1,6 +1,7 @@
 use crate::manager::{
     get_blue_channel, get_bw_channel, get_green_channel, get_image, get_red_channel,
 };
+
 use image::{buffer::ConvertBuffer, GrayImage};
 use plotters::prelude::*;
 
