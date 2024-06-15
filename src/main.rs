@@ -4,9 +4,9 @@ mod gray;
 mod histogram;
 mod manager;
 
-use crate::fft::directional_fft_2d;
+use crate::fft::{directional_fft_2d, plot_fft};
 use crate::manager::get_image;
-use image::{buffer::ConvertBuffer, GrayImage, ImageBuffer, Rgb};
+use image::{buffer::ConvertBuffer, GrayImage};
 use rustfft::{num_complex::Complex, FftDirection};
 use std::env;
 use std::result::Result;
@@ -70,12 +70,14 @@ fn main() -> Result<(), &'static str> {
         });
     }
 
-    let _ = fft::directional_fft_2d(
+    fft::directional_fft_2d(
         FftDirection::Forward,
         &mut to_fft_buffer,
         width as usize,
         height as usize,
     );
+
+    let _ = plot_fft(width, height, to_fft_buffer);
 
     Ok(())
 }

@@ -1,4 +1,5 @@
 // Reference: https://github.com/mpizenberg/fft2d/blob/main/src/slice.rs#L23
+use image::{ImageBuffer, ImageFormat};
 use plotters::prelude::*;
 use rustfft::{num_complex::Complex, FftDirection, FftPlanner};
 
@@ -47,6 +48,28 @@ pub fn transpose<T: Copy + Default>(
     transposed_img
 }
 
-pub fn plot_fft(fft_buf: Vec<Complex<f64>>) {
-    let abs_fft = fft_buf.iter().map(|x| *x = x.abs());
+pub fn plot_fft(
+    width: u32,
+    height: u32,
+    fft_buf: Vec<Complex<f64>>,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let buf_size = fft_buf.len();
+    let mut abs_fft = vec![0u8; buf_size];
+
+    for i in 0..buf_size {
+        abs_fft[i] = fft_buf[i].norm_sqr() as u8;
+    }
+
+    println!("{:?}", fft_buf);
+
+    let _ = image::save_buffer_with_format(
+        "/new_images/fft_image.png",
+        abs_fft.as_mut_slice(),
+        width,
+        height,
+        image::ColorType::L8,
+        ImageFormat::Png,
+    );
+
+    Ok(())
 }
