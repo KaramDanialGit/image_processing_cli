@@ -6,10 +6,11 @@ mod manager;
 
 use crate::fft::{directional_fft_2d, plot_fft};
 use crate::manager::get_image;
+use fft2d::slice::{fft_2d, fftshift};
 use image::{buffer::ConvertBuffer, GrayImage};
 use rustfft::{num_complex::Complex, FftDirection};
-use std::env;
 use std::result::Result;
+use std::{env, fs};
 
 fn print_cmd_debug() {
     println!("--------------------------------------------------------");
@@ -70,14 +71,19 @@ fn main() -> Result<(), &'static str> {
         });
     }
 
-    fft::directional_fft_2d(
-        FftDirection::Forward,
-        &mut to_fft_buffer,
+    fft_2d(
         width as usize,
         height as usize,
+        to_fft_buffer.as_mut_slice(),
     );
 
-    let _ = plot_fft(width, height, to_fft_buffer);
+    let plot_buff = fftshift(
+        width as usize,
+        height as usize,
+        to_fft_buffer.as_mut_slice(),
+    );
+
+    let _ = plot_fft(width, height, plot_buff);
 
     Ok(())
 }
