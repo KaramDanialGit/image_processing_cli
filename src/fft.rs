@@ -57,7 +57,7 @@ pub fn plot_fft(
     let mut abs_fft = vec![0u8; buf_size];
 
     for i in 0..buf_size {
-        abs_fft[i] = (fft_buf[i].norm_sqr() / buf_size as f64) as u8;
+        abs_fft[i] = fft_buf[i].norm_sqr() as u8;
     }
 
     let _ = image::save_buffer_with_format(

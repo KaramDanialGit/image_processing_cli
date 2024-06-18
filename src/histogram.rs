@@ -1,5 +1,5 @@
 use crate::manager::{
-    get_blue_channel, get_bw_channel, get_green_channel, get_image, get_red_channel,
+    get_blue_channel, get_bw_channel, get_green_channel, get_red_channel, get_rgb8_image,
 };
 
 use image::{buffer::ConvertBuffer, GrayImage};
@@ -8,7 +8,7 @@ use plotters::prelude::*;
 pub fn generate_red_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
     let get_path: String = format!("images/{}", image_name);
     let hist_out_name: &str = "plotters-doc-data/red_histogram.png";
-    let img = get_image(&get_path).unwrap();
+    let img = get_rgb8_image(&get_path).unwrap();
 
     let red_channel = get_red_channel(&img);
     let mut red_u32_channel: Vec<u32> = Vec::new();
@@ -50,7 +50,7 @@ pub fn generate_red_histogram(image_name: &String) -> Result<(), Box<dyn std::er
 pub fn generate_green_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
     let get_path: String = format!("images/{}", image_name);
     let hist_out_name: &str = "plotters-doc-data/green_histogram.png";
-    let img = get_image(&get_path).unwrap();
+    let img = get_rgb8_image(&get_path).unwrap();
 
     let green_channel = get_green_channel(&img);
     let mut green_u32_channel: Vec<u32> = Vec::new();
@@ -92,7 +92,7 @@ pub fn generate_green_histogram(image_name: &String) -> Result<(), Box<dyn std::
 pub fn generate_blue_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
     let get_path: String = format!("images/{}", image_name);
     let hist_out_name: &str = "plotters-doc-data/blue_histogram.png";
-    let img = get_image(&get_path).unwrap();
+    let img = get_rgb8_image(&get_path).unwrap();
 
     let blue_channel = get_blue_channel(&img);
     let mut blue_u32_channel: Vec<u32> = Vec::new();
@@ -134,7 +134,7 @@ pub fn generate_blue_histogram(image_name: &String) -> Result<(), Box<dyn std::e
 pub fn generate_bw_histogram(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
     let get_path: String = format!("images/{}", image_name);
     let hist_out_name: &str = "plotters-doc-data/bw_histogram.png";
-    let img = get_image(&get_path).unwrap();
+    let img = get_rgb8_image(&get_path).unwrap();
     let gray_image: GrayImage = img.convert();
 
     let bw_channel = get_bw_channel(gray_image);

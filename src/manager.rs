@@ -2,10 +2,21 @@ use image::Rgb;
 use image::{ImageBuffer, Luma, Pixel};
 use std::path::Path;
 
-pub fn get_image(image_name: &String) -> Option<ImageBuffer<Rgb<u8>, Vec<u8>>> {
+pub fn get_rgb8_image(image_name: &String) -> Option<ImageBuffer<Rgb<u8>, Vec<u8>>> {
     let img = image::open(&Path::new(image_name))
         .expect("File not found!")
         .to_rgb8();
+
+    match img.is_empty() {
+        false => Some(img),
+        true => None,
+    }
+}
+
+pub fn get_luma8_image(image_name: &String) -> Option<ImageBuffer<Luma<u8>, Vec<u8>>> {
+    let img = image::open(&Path::new(image_name))
+        .expect("File not found!")
+        .into_luma8();
 
     match img.is_empty() {
         false => Some(img),

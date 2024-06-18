@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 image = "0.25.1"
 plotters = "0.3.6"
-show-image = "=0.10.1"
 rustfft = "6.2.0"
 fft2d = "0.1.1"
 nalgebra = "*"
+show-image = "0.14.0"

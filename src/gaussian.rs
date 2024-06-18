@@ -1,4 +1,4 @@
-use crate::manager::get_image;
+use crate::manager::get_rgb8_image;
 use image::{ImageFormat, Pixel, Rgb, RgbImage};
 use std::cmp::max;
 use std::f64::consts::{E, PI};
@@ -42,7 +42,7 @@ pub fn gaussian_blur_png(image_name: &String, radius: i32) -> Result<(), &str> {
     let set_path: String = format!("new_images/blur_{}", image_name);
     let kernel = generate_gaussian_kernel(radius);
 
-    let img = get_image(&get_path);
+    let img = get_rgb8_image(&get_path);
 
     if img.is_none() {
         return Err("Image not found");
