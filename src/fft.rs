@@ -75,11 +75,11 @@ pub fn plot_phase(width: u32, height: u32, fft_buf: Vec<Complex<f64>>) -> GrayIm
             .to_degrees();
     }
 
+    let max_phase = tmp_fft.iter().cloned().fold(0.0 / 0.0, f64::max);
+
     for i in 0..buf_size {
         phase_fft[i] = (tmp_fft[i] / max_phase * 255.0) as u8;
     }
-
-    println!("{:?}", phase_fft);
 
     GrayImage::from_raw(width, height, phase_fft).unwrap()
 }

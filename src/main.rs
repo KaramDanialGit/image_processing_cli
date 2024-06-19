@@ -1,10 +1,12 @@
 mod fft;
 mod gaussian;
+mod general_modifiers;
 mod gray;
 mod histogram;
 mod manager;
 
 use crate::fft::fft_image;
+use crate::general_modifiers::flip_horizontal;
 use crate::manager::get_luma8_image;
 use image::{buffer::ConvertBuffer, GrayImage};
 use rustfft::{num_complex::Complex, FftDirection};
@@ -52,6 +54,7 @@ fn main() -> Result<(), &'static str> {
     // };
 
     let _ = fft_image(&image_name);
+    let _ = flip_horizontal(&image_name);
 
     Ok(())
 }
