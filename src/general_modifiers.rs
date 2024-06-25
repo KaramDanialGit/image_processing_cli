@@ -13,9 +13,9 @@ pub fn flip_h(image_name: &String) -> Result<(), Box<dyn std::error::Error>> {
         .expect("File not found!")
         .to_rgb8();
 
-    let new_image = flip_horizontal(&img);
-    let save_path: String = format!("new_images/h_flipped_{}", image_name);
-    ImageRgb8(new_image).save(save_path).unwrap();
+    // let new_image = flip_horizontal(&img);
+    // let save_path: String = format!("new_images/h_flipped_{}", image_name);
+    // ImageRgb8(new_image).save(save_path).unwrap();
 
     Ok(())
 }
