@@ -31,6 +31,10 @@ fn main() -> Result<(), &'static str> {
     let image_name: &String = &args[1];
     let op: &String = &args[2];
     let parameter: Option<String> = Some(args[3].clone());
+    let input_parameter = parameter
+        .expect("No parameter value passed after funciton call")
+        .parse::<u32>()
+        .unwrap();
 
     match image_type.as_str() {
         ".jpeg" => println!("jpeg image"),
@@ -38,17 +42,13 @@ fn main() -> Result<(), &'static str> {
         _ => println!("Please, enter a compatible image file"),
     };
 
-    // let _ = match op.as_str() {
-    //     "gray" => gray::convert_to_gray_png(image_name),
-    //     "gaussian_blur" => gaussian::gaussian_blur_png(
-    //         image_name,
-    //         parameter
-    //             .expect("No parameter passed after funciton call")
-    //             .parse::<i32>()
-    //             .unwrap(),
-    //     ),
-    //     _ => Err("Please, enter a valid function"),
-    // };
+    let _ = match op.as_str() {
+        "gray" => gray::convert_to_gray_png(image_name),
+        "gaussian_blur" => gaussian::gaussian_blur_png(image_name, input_parameter as i32),
+        "fft" => fft::fft_image(image_name),
+        "crop_image" => general_modifiers::crop_image(image_name, 0, 0), // TODO: Fix inputs to 4 point vec
+        _ => Err("Please, enter a valid function"),
+    };
 
     Ok(())
 }

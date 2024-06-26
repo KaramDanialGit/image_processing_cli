@@ -5,7 +5,7 @@ use image::DynamicImage::ImageLuma8;
 use image::{GrayImage, ImageBuffer, ImageFormat};
 use rustfft::{num_complex::Complex, FftDirection, FftPlanner};
 
-pub fn fft_image(image_name: &str) -> Result<(), Box<dyn std::error::Error>> {
+pub fn fft_image(image_name: &str) -> Result<(), &str> {
     let get_path: String = format!("images/{}", image_name);
     let gray_image = get_luma8_image(&get_path);
 
