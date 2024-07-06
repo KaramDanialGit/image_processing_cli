@@ -47,6 +47,8 @@ fn main() -> Result<(), &'static str> {
         "gaussian_blur" => gaussian::gaussian_blur_png(image_name, input_parameter as i32),
         "fft" => fft::fft_image(image_name),
         "crop_image" => general_modifiers::crop_image(image_name, 0, 0), // TODO: Fix inputs to 4 point vec
+        "rotate" => general_modifiers::rotate_image(image_name, input_parameter as i32),
+        "invert" => general_modifiers::invert_image(image_name),
         _ => Err("Please, enter a valid function"),
     };
 
